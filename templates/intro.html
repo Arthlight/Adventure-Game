@@ -1,5 +1,9 @@
 <h1>{{.Title}}</h1>
 <div>
     <p>{{.Story}}</p>
-    <p>{{.Options}}</p>
+    {{range $item := .Options}}
+    {{range $key, $value := $item}}
+        <p></p>
+    {{end}}
+    {{end}}
 </div>
