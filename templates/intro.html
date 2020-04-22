@@ -11,6 +11,8 @@
     {{end}}
     <ul>
     {{range .Options}}
+        <!-- This appends the Arc name to the base url when you click on it and renders the corresponding site
+         by recalling the ServeHTTP Method for the new path-->
         <li><a href="/{{.Arc}}">{{.Text}}</a></li>
     {{end}}
     </ul>

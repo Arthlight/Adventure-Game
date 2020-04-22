@@ -43,12 +43,24 @@ type handler struct {
 }
 
 func (h handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	err := tpl.Execute(w, h.s["intro"])
-	if err != nil {
-		log.Fatal(err)
+	path := r.URL.Path
+	if path == "" || path =="/" {
+		path = "/intro"
 	}
-}
+	path = path[1:]
 
+	if chapter, ok := h.s[path]; ok {
+		err := tpl.Execute(w, chapter)
+		if err != nil {
+			log.Printf("%v", err) // %v print the value in the default format
+			http.Error(w, "Oh no! It seems like something went wrong...", http.StatusInternalServerError)
+		}
+
+		return
+	}
+
+	http.Error(w, "Unfortunately that chapter couldn't be found :(", http.StatusBadRequest)
+}
 
 type Story map[string]Chapter
 
