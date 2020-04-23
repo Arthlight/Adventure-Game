@@ -59,7 +59,7 @@ func (h handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	http.Error(w, "Unfortunately that chapter couldn't be found :(", http.StatusBadRequest)
+	http.Error(w, "Unfortunately that chapter couldn't be found :-(", http.StatusBadRequest)
 }
 
 type Story map[string]Chapter
